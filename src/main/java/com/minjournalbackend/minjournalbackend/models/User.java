@@ -30,11 +30,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Post> getTasks() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setTasks(List<Post> tasks) {
-        this.posts = tasks;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

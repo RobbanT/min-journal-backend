@@ -4,13 +4,13 @@ import java.time.*;
 
 public class Post {
     public enum States { SAD, HAPPY, STRESSED, ANGRY, TIRED }
-    private String createdTime, note;
     private States state;
+    private String createdTime, note;
 
-    public Post(String note, States state) {
+    public Post(States state, String note) {
+        this.state = state;
         createdTime = LocalDateTime.now(ZoneId.of("Europe/Paris")).toString();
         this.note = note;
-        this.state = state;
     }
 
     public String getCreatedTime() {
