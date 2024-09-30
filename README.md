@@ -1,2 +1,3 @@
-# min-journal-backend
-School project. Nothing special here.
+# Min Journal Backend
+
+![](min-journal.png)
