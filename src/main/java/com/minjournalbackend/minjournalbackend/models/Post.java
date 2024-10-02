@@ -9,7 +9,7 @@ public class Post {
 
     public Post(States state, String note) {
         this.state = state;
-        createdTime = LocalDateTime.now(ZoneId.of("Europe/Paris")).toString();
+        this.createdTime = LocalDateTime.now(ZoneId.of("Europe/Paris")).toString();
         this.note = note;
     }
 

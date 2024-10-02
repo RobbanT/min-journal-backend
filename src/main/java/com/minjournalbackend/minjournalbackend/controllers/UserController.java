@@ -34,7 +34,7 @@ public class UserController {
 
     // Hämtar alla poster för en viss tidsperiod.
     @GetMapping("/user/{username}/posts")
-    public List<Post> getPosts(@PathVariable String username, String minDate, String maxDate) {
+    public List<Post> getPosts(@PathVariable String username, @RequestHeader String minDate, @RequestHeader String maxDate) {
         return userService.getPosts(username, minDate, maxDate);
     }
 }

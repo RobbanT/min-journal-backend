@@ -29,7 +29,7 @@ public class UserService {
     // användarnamn och lösenord returnerar vi null. Används när en användare vill logga in.
     public User getUser(String username, String password) {
         return findUser(username) != null &&
-            bcryptEncoder.matches(password, findUser(username).getPassword()) ?
+            bcryptEncoder.matches(password, findUser(username).getPassword()) ? 
             findUser(username) : null;
     }
 
@@ -46,17 +46,16 @@ public class UserService {
         user.getPosts().add(post);
         Query query = new Query();
         query.addCriteria((Criteria.where("username").is(user.getUsername())));
-        mongoOperations.updateFirst(query, Update.update("tasks", user.getPosts()), User.class);
+        mongoOperations.updateFirst(query, Update.update("posts", user.getPosts()), User.class);
         return post;
     }
 
     // Returnerar alla inlägg för en användare inom en viss tidsperiod.
     public List<Post> getPosts(String username, String minDate, String maxDate) {
-        minDate.concat("T00:00:00");
-        maxDate.concat("T00:00:00");
         List<Post> posts = findUser(username).getPosts();
-        posts.removeIf(p -> (LocalDateTime.parse(p.getCreatedTime()).isBefore(LocalDateTime.parse(minDate))
-            || LocalDateTime.parse(p.getCreatedTime()).isAfter(LocalDateTime.parse(maxDate))));
+        posts.removeIf(p -> 
+            (LocalDateTime.parse(p.getCreatedTime()).isBefore(LocalDateTime.parse(minDate.replace("\"", "") + "T00:00:00")) || 
+            LocalDateTime.parse(p.getCreatedTime()).isAfter(LocalDateTime.parse(maxDate.replace("\"", "") + "T00:00:00"))));
         return posts;
     }
 }
