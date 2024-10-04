@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import com.minjournalbackend.minjournalbackend.models.*;
 import com.minjournalbackend.minjournalbackend.services.UserService;
 
-@CrossOrigin("https://min-journal-app-gmr2z.ondigitalocean.app")
+@CrossOrigin("*")
 @RestController
 public class UserController {
     private UserService userService;
