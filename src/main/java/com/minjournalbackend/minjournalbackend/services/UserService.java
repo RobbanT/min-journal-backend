@@ -53,9 +53,10 @@ public class UserService {
     // Returnerar alla inlägg för en användare inom en viss tidsperiod.
     public List<Post> getPosts(String username, String minDate, String maxDate) {
         List<Post> posts = findUser(username).getPosts();
+        System.out.println(posts.get(0).getCreatedTime());
         posts.removeIf(p -> (
             LocalDateTime.parse(p.getCreatedTime()).isBefore(LocalDateTime.parse(minDate.replace("\"", "") + "T00:00:00")) || 
-            LocalDateTime.parse(p.getCreatedTime()).isAfter(LocalDateTime.parse(maxDate.replace("\"", "") + "T01:00:00"))));
+            LocalDateTime.parse(p.getCreatedTime()).isAfter(LocalDateTime.parse(maxDate.replace("\"", "") + "T00:00:00"))));
         return posts;
     }
 }
