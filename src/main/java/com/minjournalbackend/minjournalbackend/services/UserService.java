@@ -54,8 +54,10 @@ public class UserService {
     public List<Post> getPosts(String username, String minDate, String maxDate) {
         List<Post> posts = findUser(username).getPosts();
         posts.removeIf(p -> 
-            (LocalDateTime.parse(p.getCreatedTime()).isBefore(LocalDateTime.parse(minDate.replace("\"", "") + "T00:00:00")) || 
-            LocalDateTime.parse(p.getCreatedTime()).isAfter(LocalDateTime.parse(maxDate.replace("\"", "") + "T00:00:00"))));
+            ((!LocalDateTime.parse(p.getCreatedTime()).isEqual(LocalDateTime.parse(minDate.replace("\"", "") + "T00:00:00")) && 
+                !LocalDateTime.parse(p.getCreatedTime()).isEqual(LocalDateTime.parse(maxDate.replace("\"", "") + "T00:00:00")))) &&
+                (LocalDateTime.parse(p.getCreatedTime()).isBefore(LocalDateTime.parse(minDate.replace("\"", "") + "T00:00:00")) || 
+                LocalDateTime.parse(p.getCreatedTime()).isAfter(LocalDateTime.parse(maxDate.replace("\"", "") + "T00:00:00"))));
         return posts;
     }
 }
